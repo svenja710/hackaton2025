@@ -9,6 +9,11 @@ from openai import OpenAI
 st.markdown(
     """
     <style>
+    .stButton>button{
+     border-radius:8px;
+     width:300px;
+     background-color:#f7f7fa;
+     }
     .main-logo {
         display: flex;
         align-items: center;
@@ -54,7 +59,7 @@ st.markdown(
         max-width: 270px;
         width: 100%;
         height: 54px;
-        border-radius: 28px !important;
+        border-radius: 24px !important;
         font-size: 1.15rem !important;
         font-weight: 500;
         margin-bottom: 16px;
@@ -87,22 +92,14 @@ st.markdown(
         background: #6fdc8c !important;
         color: #222 !important;
         font-weight: 600;
-        border-radius: 8px !important;
+        border-radius: 24px !important;
         border: none !important;
         padding: 0.5em 1.6em !important;
         font-size: 1.1rem !important;
         box-shadow: 0 2px 8px 0 #0001;
     }
-    .stButton>button.secondary-btn {
-        background: #fff !important;
-        color: #222 !important;
-        border: 1.5px solid #bbb !important;
-        border-radius: 8px !important;
-        padding: 0.5em 1.6em !important;
-        font-size: 1.1rem !important;
-        font-weight: 500;
-    }
-    </style>
+ 
+
     """,
     unsafe_allow_html=True
 )
@@ -134,11 +131,11 @@ st.markdown("""
 </span>
 <br><br>
 <div style='display:flex;gap:12px;margin-bottom:1em;'>
-    <button style='background:#fff;border:1.5px solid #bbb;border-radius:8px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🔵 Real</button>
-    <button style='background:#fff;border:1.5px solid #bbb;border-radius:8px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🕵️‍♂️ Krimi</button>
-    <button style='background:#fff;border:1.5px solid #bbb;border-radius:8px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🧚 Fantasy</button>
-    <button style='background:#fff;border:1.5px solid #bbb;border-radius:8px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🔥 Action</button>
-    <button class='green-btn' style='float:right;margin-top:0.5em;'>Meine Geschichte generieren</button>
+    <button style='background:#fff;border:1.5px solid #bbb;border-radius:50px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🔵 Real</button>
+    <button style='background:#fff;border:1.5px solid #bbb;border-radius:50px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🕵️‍♂️ Krimi</button>
+    <button style='background:#fff;border:1.5px solid #bbb;border-radius:50px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🧚 Fantasy</button>
+    <button style='background:#fff;border:1.5px solid #bbb;border-radius:50px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🔥 Action</button>
+    <button class='green-btn' style='float:right;margin-top:0.5em;background:#B1F588;border-radius:50px'>Meine Geschichte generieren</button>
 </div>
 
 </div>

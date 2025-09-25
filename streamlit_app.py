@@ -98,7 +98,10 @@ st.markdown(
         font-size: 1.1rem !important;
         box-shadow: 0 2px 8px 0 #0001;
     }
- 
+    @media (max-width: 768px) {
+        .vibe {
+            flex-direction: column;
+            }
 
     """,
     unsafe_allow_html=True
@@ -130,7 +133,7 @@ st.markdown("""
 <i>Ich heiße Tom, bin 38 Jahre alt und wohne in Hamburg. Ich bin am 2. August 1987 geboren. Ich habe zwei Kinder – Emma ist 6 und Jonas 11. Ich bin verheiratet mit Lea, unser Hochzeitstag ist der 10. Oktober 2010. Wenn ich Zeit habe, bin ich im Garten oder grille mit Freunden. Mein Herz schlägt für den FC St. Pauli – sonst koche ich gern, ich hasse Tomaten. Meine absolute Lieblingszahl? Ganz klar: die 10.</i>
 </span>
 <br><br>
-<div style='display:flex;gap:12px;margin-bottom:1em;'>
+<div  class='vibe';style='display:flex;gap:12px;margin-bottom:1em;'>
     <button style='background:#fff;border:1.5px solid #bbb;border-radius:50px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🔵 Real</button>
     <button style='background:#fff;border:1.5px solid #bbb;border-radius:50px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🕵️‍♂️ Krimi</button>
     <button style='background:#fff;border:1.5px solid #bbb;border-radius:50px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🧚 Fantasy</button>

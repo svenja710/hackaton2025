@@ -52,6 +52,59 @@ with tab1:
 
 with tab2:
     st.write("Inhalt für Tab 2")
+    st.markdown(
+        """
+        <style>
+        .dice {
+            width: 60px;
+            height: 60px;
+            margin: 40px auto;
+            position: relative;
+            perspective: 200px;
+        }
+        .cube {
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            transform-style: preserve-3d;
+            animation: roll 1.5s infinite linear;
+        }
+        .face {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: #fff;
+            border: 2px solid #888;
+            border-radius: 10px;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .face1 { transform: rotateY(0deg) translateZ(30px); }
+        .face2 { transform: rotateY(180deg) translateZ(30px); }
+        .face3 { transform: rotateY(90deg) translateZ(30px); }
+        .face4 { transform: rotateY(-90deg) translateZ(30px); }
+        .face5 { transform: rotateX(90deg) translateZ(30px); }
+        .face6 { transform: rotateX(-90deg) translateZ(30px); }
+        @keyframes roll {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        </style>
+        <div class="dice">
+            <div class="cube">
+                <div class="face face1">⚀</div>
+                <div class="face face2">⚁</div>
+                <div class="face face3">⚂</div>
+                <div class="face face4">⚃</div>
+                <div class="face face5">⚄</div>
+                <div class="face face6">⚅</div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 with tab3:
     st.write("Inhalt für Tab 3")

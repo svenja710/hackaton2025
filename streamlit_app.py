@@ -16,6 +16,12 @@ with tab1:
         "To use this app, you need to provide an OpenAI API key, which you can get [here](https://platform.openai.com/account/api-keys). "
         "You can also learn how to build this app step by step by [following our tutorial](https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps)."
     )
+    st.button("🍕 Pizza")
+    st.button("⚽ Fußball")
+    st.button("🎵 Note")
+    st.button("📚 Buch")
+    st.button("🎲 Zufall")
+
 
 with tab2:
     st.write("Inhalt für Tab 2")

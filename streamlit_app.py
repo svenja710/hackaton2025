@@ -50,9 +50,11 @@ st.markdown(
         margin-bottom: 1.5em;
     }
     .themen-btn button {
+        min-width: 270px;
+        max-width: 270px;
         width: 100%;
         height: 54px;
-        border-radius: 12px !important;
+        border-radius: 28px !important;
         font-size: 1.15rem !important;
         font-weight: 500;
         margin-bottom: 16px;
@@ -66,6 +68,8 @@ st.markdown(
         gap: 10px;
         padding-left: 18px !important;
         transition: border 0.2s;
+        margin-left: auto;
+        margin-right: auto;
     }
     .themen-btn button:hover {
         border: 1.5px solid #d72638;
@@ -107,7 +111,7 @@ st.markdown(
 st.logo("images/image.png")
 
 # --- Headerbild ---
-st.image("images/image copy.png", use_column_width=False, output_format="PNG", caption=None, clamp=False, channels="RGB")
+st.image("images/image copy.png", use_container_width=False, output_format="PNG", caption=None, clamp=False, channels="RGB")
 st.markdown("<div class='header-img'></div>", unsafe_allow_html=True)
 
 # --- Überschrift und Beschreibung ---
@@ -134,8 +138,9 @@ st.markdown("""
     <button style='background:#fff;border:1.5px solid #bbb;border-radius:8px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🕵️‍♂️ Krimi</button>
     <button style='background:#fff;border:1.5px solid #bbb;border-radius:8px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🧚 Fantasy</button>
     <button style='background:#fff;border:1.5px solid #bbb;border-radius:8px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🔥 Action</button>
+    <button class='green-btn' style='float:right;margin-top:0.5em;'>Meine Geschichte generieren</button>
 </div>
-<button class='green-btn' style='float:right;margin-top:0.5em;'>Meine Geschichte generieren</button>
+
 </div>
 """, unsafe_allow_html=True)
 

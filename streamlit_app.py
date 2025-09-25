@@ -1,178 +1,186 @@
 
+
 import streamlit as st
 from openai import OpenAI
 
 
-# Wald-Header mit Emojis
+
+# --- Custom CSS for modern look ---
 st.markdown(
     """
-    <div style='text-align:center; font-size:2.2rem; margin-bottom: 0.5em;'>
-        🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲🌳🌲
-    </div>
+    <style>
+    .main-logo {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 0.5em;
+    }
+    .main-logo img {
+        height: 38px;
+    }
+    .slogan {
+        color: #d72638;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-left: 8px;
+    }
+    .header-img {
+        border-radius: 16px;
+        margin-bottom: 1.5em;
+        box-shadow: 0 4px 24px 0 #0001;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+    .rounded-box {
+        background: #f7f7fa;
+        border-radius: 18px;
+        padding: 1.5em 2em 1.2em 2em;
+        margin-bottom: 2em;
+        box-shadow: 0 2px 12px 0 #0001;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .themen-grid {
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1.5em;
+    }
+    .themen-btn button {
+        width: 100%;
+        height: 54px;
+        border-radius: 12px !important;
+        font-size: 1.15rem !important;
+        font-weight: 500;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 8px 0 #0001;
+        border: 1.5px solid #e0e0e0;
+        background: #fff;
+        color: #222;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        padding-left: 18px !important;
+        transition: border 0.2s;
+    }
+    .themen-btn button:hover {
+        border: 1.5px solid #d72638;
+    }
+    .action-row {
+        display: flex;
+        justify-content: flex-end;
+        gap: 16px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 2em;
+    }
+    .stButton>button.green-btn {
+        background: #6fdc8c !important;
+        color: #222 !important;
+        font-weight: 600;
+        border-radius: 8px !important;
+        border: none !important;
+        padding: 0.5em 1.6em !important;
+        font-size: 1.1rem !important;
+        box-shadow: 0 2px 8px 0 #0001;
+    }
+    .stButton>button.secondary-btn {
+        background: #fff !important;
+        color: #222 !important;
+        border: 1.5px solid #bbb !important;
+        border-radius: 8px !important;
+        padding: 0.5em 1.6em !important;
+        font-size: 1.1rem !important;
+        font-weight: 500;
+    }
+    </style>
     """,
     unsafe_allow_html=True
 )
 
+# --- Logo und Slogan ---
+st.logo("images/image.png")
 
-# Tabs erstellen
-tab1, tab2, tab3, tab4 = st.tabs([
-    "Tab 1", "Tab 2", "Tab 3", "Tab 4"
-])
+# --- Headerbild ---
+st.image("images/image copy.png", use_column_width=False, output_format="PNG", caption=None, clamp=False, channels="RGB")
+st.markdown("<div class='header-img'></div>", unsafe_allow_html=True)
 
+# --- Überschrift und Beschreibung ---
+st.markdown("""
+<h2>Dein LOTTO Märchen</h2>
+<p style='font-size:1.1rem; margin-bottom:2em;'>
+Stell dir vor, ein paar Zahlen könnten eine kleine Geschichte auslösen – persönlich, witzig, überraschend. Gib ein paar Infos zu dir ein – und wir generieren daraus eine Lotto-Geschichte mit deinen ganz eigenen Zahlen. Natürlich rein fiktiv – aber garantiert unterhaltsam.
+</p>
+""", unsafe_allow_html=True)
 
-with tab1:
-    st.markdown(
-        """
-        <style>
-        .icon-btn button {
-            width: 70px !important;
-            height: 70px !important;
-            border-radius: 12px !important;
-            font-size: 2rem !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 8px 8px 8px 0;
-            padding: 0 !important;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-    st.logo(image="images/image.png")
-    st.title("Mein LOTTO-Maerchen")
-    
-    st.image("images/image copy.png", use_container_width=True)
-    st.write("Lasse dir dein persoenliches Lotto-Maerchen generieren! "
-             "So hast du Lotto 6 aus 49 noch nie erlebt! 🧚")
-    # st.write(
-    #     "This is a simple chatbot that uses OpenAI's GPT-3.5 model to generate responses. "
-    #     "To use this app, you need to provide an OpenAI API key, which you can get [here](https://platform.openai.com/account/api-keys). "
-    #     "You can also learn how to build this app step by step by [following our tutorial](https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps)."
-    # )
-    st.subheader("Schreibe eine Geschichte zu deinem Lotto-Glück!")
-    st.text_input("Sei kreativ und gib ein paar Stichworte ein...")
-    st.subheader("Wähle ein Thema aus:")
+# --- Eingabebox für Story ---
+st.markdown("""
+<div class='rounded-box'>
+<b>Erzähl uns ein wenig von dir.</b><br>
+<span style='color:#666;'>Damit wir deine persönliche Geschichte schreiben können, brauchen wir ein paar Details. Keine Sorge – alles bleibt anonym und wird nicht gespeichert. Je mehr du uns verrätst, desto individueller wird deine Story.</span>
+<br><br>
+<input style='width:100%;padding:0.7em 1em;border-radius:8px;border:1.5px solid #ccc;font-size:1.05rem;margin-bottom:1em;' placeholder='Zeig mir meine Geschichte...'></input>
+<span style='color:#888;font-size:0.98rem;'>
+<i>Ich heiße Tom, bin 38 Jahre alt und wohne in Hamburg. Ich bin am 2. August 1987 geboren. Ich habe zwei Kinder – Emma ist 6 und Jonas 11. Ich bin verheiratet mit Lea, unser Hochzeitstag ist der 10. Oktober 2010. Wenn ich Zeit habe, bin ich im Garten oder grille mit Freunden. Mein Herz schlägt für den FC St. Pauli – sonst koche ich gern, ich hasse Tomaten. Meine absolute Lieblingszahl? Ganz klar: die 10.</i>
+</span>
+<br><br>
+<div style='display:flex;gap:12px;margin-bottom:1em;'>
+    <button style='background:#fff;border:1.5px solid #bbb;border-radius:8px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🔵 Real</button>
+    <button style='background:#fff;border:1.5px solid #bbb;border-radius:8px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🕵️‍♂️ Krimi</button>
+    <button style='background:#fff;border:1.5px solid #bbb;border-radius:8px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🧚 Fantasy</button>
+    <button style='background:#fff;border:1.5px solid #bbb;border-radius:8px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🔥 Action</button>
+</div>
+<button class='green-btn' style='float:right;margin-top:0.5em;'>Meine Geschichte generieren</button>
+</div>
+""", unsafe_allow_html=True)
 
-    col1, col2, col3, col4, col5 = st.columns(5)
+# --- Alternative Themenauswahl ---
+st.markdown("""
+<h4 style='margin-top:2.5em;'>Alternative: Lass dich durch Fragen inspirieren</h4>
+<p style='font-size:1.05rem;'>
+Du hast gerade keine eigene Idee für deine Geschichte? Kein Problem! Wähle einfach die Themen aus, die dich interessieren – und wir stellen dir ein paar passende Fragen dazu. Wähle <b>bis zu 6 Kategorien</b>, die zu dir passen. Alternativ kannst du dir auch per Zufall eine Auswahl zusammenstellen lassen.
+</p>
+""", unsafe_allow_html=True)
+
+# --- Themen-Grid ---
+themen = [
+    ("👤 Persönliche Angaben", "person"),
+    ("❤️ Beziehungen & Familie", "beziehung"),
+    ("⚽️ Freizeit & Interessen", "freizeit"),
+    ("🪄 Träume & Fantasien", "traeume"),
+    ("🔮 Erinnerung & Kindheit", "kindheit"),
+    ("💼 Beruf & Alltag", "beruf"),
+    ("� Glück & Aberglaube", "glueck"),
+    ("� Popkultur & Medien", "popkultur"),
+    ("🤔 Kuriose Entscheidungen", "kurios"),
+    ("✈️ Reisen & Abenteuer", "reisen"),
+    ("🌲 Natur & Tiere", "natur"),
+    ("📡️ Technologie & Zukunft", "tech"),
+]
+st.markdown("<div class='themen-grid'>", unsafe_allow_html=True)
+for i in range(0, len(themen), 2):
+    col1, col2 = st.columns(2)
     with col1:
-        st.markdown('<div class="icon-btn">', unsafe_allow_html=True)
-        st.button("🍕", key="pizza")
+        st.markdown('<div class="themen-btn">', unsafe_allow_html=True)
+        st.button(themen[i][0], key=themen[i][1])
         st.markdown('</div>', unsafe_allow_html=True)
-    with col2:
-        st.markdown('<div class="icon-btn">', unsafe_allow_html=True)
-        st.button("⚽", key="fussball")
-        st.markdown('</div>', unsafe_allow_html=True)
-    with col3:
-        st.markdown('<div class="icon-btn">', unsafe_allow_html=True)
-        st.button("🎵", key="note")
-        st.markdown('</div>', unsafe_allow_html=True)
-    with col4:
-        st.markdown('<div class="icon-btn">', unsafe_allow_html=True)
-        st.button("📚", key="buch")
-        st.markdown('</div>', unsafe_allow_html=True)
-    with col5:
-        st.markdown('<div class="icon-btn">', unsafe_allow_html=True)
-        st.button("🎲", key="zufall")
-        st.markdown('</div>', unsafe_allow_html=True)
+    if i+1 < len(themen):
+        with col2:
+            st.markdown('<div class="themen-btn">', unsafe_allow_html=True)
+            st.button(themen[i+1][0], key=themen[i+1][1])
+            st.markdown('</div>', unsafe_allow_html=True)
+st.markdown("</div>", unsafe_allow_html=True)
 
-    st.button("Jetzt Maerchen generieren!")
-    with open("images/image.png", "rb") as img_file:
-        st.download_button(
-            label="Bild herunterladen",
-            data=img_file,
-            file_name="lotto_maerchen.png",
-            mime="image/png"
-        )
-
-with tab2:
-    st.write("Inhalt für Tab 2")
-    st.markdown(
-        """
-        <style>
-        .dice {
-            width: 60px;
-            height: 60px;
-            margin: 40px auto;
-            position: relative;
-            perspective: 200px;
-        }
-        .cube {
-            width: 60px;
-            height: 60px;
-            position: absolute;
-            transform-style: preserve-3d;
-            animation: roll 1.5s infinite linear;
-        }
-        .face {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background: #fff;
-            border: 2px solid #888;
-            border-radius: 10px;
-            font-size: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .face1 { transform: rotateY(0deg) translateZ(30px); }
-        .face2 { transform: rotateY(180deg) translateZ(30px); }
-        .face3 { transform: rotateY(90deg) translateZ(30px); }
-        .face4 { transform: rotateY(-90deg) translateZ(30px); }
-        .face5 { transform: rotateX(90deg) translateZ(30px); }
-        .face6 { transform: rotateX(-90deg) translateZ(30px); }
-        @keyframes roll {
-            0% { transform: rotateX(0deg) rotateY(0deg); }
-            100% { transform: rotateX(360deg) rotateY(360deg); }
-        }
-        </style>
-        <div class="dice">
-            <div class="cube">
-                <div class="face face1">⚀</div>
-                <div class="face face2">⚁</div>
-                <div class="face face3">⚂</div>
-                <div class="face face4">⚃</div>
-                <div class="face face5">⚄</div>
-                <div class="face face6">⚅</div>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-with tab3:
-    st.write("Inhalt für Tab 3")
-
-with tab4:
-    st.write("Inhalt für Tab 4")
-
-
-# Tab 1 enthält die Chatbot-Logik
-with tab1:
-    # ...existing code...
-    openai_api_key = st.text_input("OpenAI API Key", type="password")
-    if not openai_api_key:
-        st.info("Please add your OpenAI API key to continue.", icon="🗝️")
-    else:
-        client = OpenAI(api_key=openai_api_key)
-        if "messages" not in st.session_state:
-            st.session_state.messages = []
-        for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
-        if prompt := st.chat_input("What is up?"):
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            with st.chat_message("user"):
-                st.markdown(prompt)
-            stream = client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": m["role"], "content": m["content"]}
-                    for m in st.session_state.messages
-                ],
-                stream=True,
-            )
-            with st.chat_message("assistant"):
-                response = st.write_stream(stream)
-            st.session_state.messages.append({"role": "assistant", "content": response})
+# --- Action Buttons unten rechts ---
+st.markdown("<div class='action-row'>", unsafe_allow_html=True)
+colA, colB = st.columns([1,1])
+with colA:
+    st.button("Zufällige Auswahl", key="zufall", help="Stellt eine zufällige Themenauswahl zusammen.", type="secondary")
+with colB:
+    st.button("Weiter zu meinen Fragen", key="weiter", help="Weiter zu den ausgewählten Fragen.", type="primary")
+st.markdown("</div>", unsafe_allow_html=True)

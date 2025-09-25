@@ -138,7 +138,7 @@ st.markdown("""
     <button style='background:#fff;border:1.5px solid #bbb;border-radius:50px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🕵️‍♂️ Krimi</button>
     <button style='background:#fff;border:1.5px solid #bbb;border-radius:50px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🧚 Fantasy</button>
     <button style='background:#fff;border:1.5px solid #bbb;border-radius:50px;padding:0.4em 1.2em;font-size:1.05rem;cursor:pointer;'>🔥 Action</button>
-    <button class='green-btn' style='float:right;margin-top:0.5em;background:#B1F588;border-radius:50px'>Meine Geschichte generieren</button>
+    <button class='green-btn' style='float:right;background:#B1F588;border-radius:50px'>Meine Geschichte generieren</button>
 </div>
 
 </div>
@@ -167,19 +167,57 @@ themen = [
     ("🌲 Natur & Tiere", "natur"),
     ("📡️ Technologie & Zukunft", "tech"),
 ]
+if "themen_auswahl" not in st.session_state:
+    st.session_state["themen_auswahl"] = set()
+
+def toggle_thema(thema_key):
+    auswahl = st.session_state["themen_auswahl"]
+    if thema_key in auswahl:
+        auswahl.remove(thema_key)
+    elif len(auswahl) < 6:
+        auswahl.add(thema_key)
+    st.session_state["themen_auswahl"] = auswahl
+
 st.markdown("<div class='themen-grid'>", unsafe_allow_html=True)
 for i in range(0, len(themen), 2):
     col1, col2 = st.columns(2)
+    # Button 1
+    label1, key1 = themen[i]
+    selected1 = key1 in st.session_state["themen_auswahl"]
     with col1:
         st.markdown('<div class="themen-btn">', unsafe_allow_html=True)
-        st.button(themen[i][0], key=themen[i][1])
+        if st.button(label1, key=f"btn_{key1}"):
+            toggle_thema(key1)
+        # Auswahl optisch hervorheben
+        if selected1:
+            st.markdown(
+                "<style>div[data-testid='stButton'][key='btn_%s'] button{border:2px solid #1ec773 !important; background:#eafff2 !important;}</style>" % key1,
+                unsafe_allow_html=True
+            )
         st.markdown('</div>', unsafe_allow_html=True)
+    # Button 2
     if i+1 < len(themen):
+        label2, key2 = themen[i+1]
+        selected2 = key2 in st.session_state["themen_auswahl"]
         with col2:
             st.markdown('<div class="themen-btn">', unsafe_allow_html=True)
-            st.button(themen[i+1][0], key=themen[i+1][1])
+            if st.button(label2, key=f"btn_{key2}"):
+                toggle_thema(key2)
+            if selected2:
+                st.markdown(
+                    "<style>div[data-testid='stButton'][key='btn_%s'] button{border:2px solid #1ec773 !important; background:#eafff2 !important;}</style>" % key2,
+                    unsafe_allow_html=True
+                )
             st.markdown('</div>', unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
+
+# Hinweistext zu Auswahl
+auswahl_count = len(st.session_state["themen_auswahl"])
+if auswahl_count < 2:
+    st.warning("Bitte wähle mindestens 2 Kategorien aus.")
+elif auswahl_count > 6:
+    st.error("Du kannst maximal 6 Kategorien auswählen.")
+
 
 # --- Action Buttons unten rechts ---
 st.markdown("<div class='action-row'>", unsafe_allow_html=True)
